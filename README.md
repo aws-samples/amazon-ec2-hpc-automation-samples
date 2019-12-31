@@ -31,19 +31,19 @@ The diagram below shows how a spot instance is launched by the Lambda Function w
 6.	Now go to the Amazon EC2 dashboard and create an instance with the application from the “App” folder, its data, and its dependencies. Test the application. Once everything works fine, create an AMI out of it and use it in the launch template.  Note: Please replace your credentials and your S3 bucket name in “App/app.js” file before using it in the instance created.
 7.	Create a Launch Template with the following properties, leave the rest to their default values:
 
-•	AMI id: ami-0ad53790da23622a5 or the AMI id that you have created (your Custome AMI).
+	* AMI id: ami-0ad53790da23622a5 or the AMI id that you have created (your Custome AMI).
 
-•	Instance type: c4.large {you can add as many types of instance as you want separating them with a comma}
+	* Instance type: c4.large {you can add as many types of instance as you want separating them with a comma}
 
-•	KeyPair: Use existing Key pair, this is used to log into the instances to debug. If there is no Key Pair, create one.
+	* KeyPair: Use existing Key pair, this is used to log into the instances to debug. If there is no Key Pair, create one.
 
-•	Security Group: add the SG that allows the port 22 for debugging and 80 if application is a web app. The CloudFormation template creates this. You can use the same.
+	* Security Group: add the SG that allows the port 22 for debugging and 80 if application is a web app. The CloudFormation template creates this. You can use the same.
 
-•	In Advanced Settings: 
-*	Purchasing Option: Spot
-*	Spot Request Type: one-time {can also be persistent for different use cases}
-*	IAM Instance Profile: if does not exist, create one role which allows EC2 to access other AWS services like Amazon S3.
-*	UserData: refer “userdata.md” file and replace S3 url with your bucket name. Optionally, we override this in Lambda code as well.
+	* In Advanced Settings: 
+	**	Purchasing Option: Spot
+	**	Spot Request Type: one-time {can also be persistent for different use cases}
+	**	IAM Instance Profile: if does not exist, create one role which allows EC2 to access other AWS services like Amazon S3.
+	**	UserData: refer “userdata.md” file and replace S3 url with your bucket name. Optionally, we override this in Lambda code as well.
 8.	Once the template is created, update the first lambda function with its name or ID.
 9.	Now create an AutoScaling Group with the Launch Template and add a scaling policy based on CPU utilization. Use the settings as shown below, leave other parameters to their default values:
 a.	Min:0
@@ -58,16 +58,13 @@ i.	Disable scale-in: No
 
 Although this application is solving a simple mathematical problem, with this approach, you can solve complex mathematical problems in various industries, leveraging AWS HPC. 
 
-** NOTE: **
+**NOTE:**
 
 @Sample Application Code:
-
 This is the code that reads data from Amazon S3 and processes it and uploads the results back to S3. This code comes as part of the custom AMI created.  To install packages, use “npm install” command first before running “node app.js”
 
 @Sample Data Used:
-
-Save this data as “datainput.csv” file in “App” folder and upload it to S3 to start the Demo.
-
+Save your custom data as “datainput.csv” file in “App” folder and upload it to S3 to start the Demo.
 
 
 ## License
