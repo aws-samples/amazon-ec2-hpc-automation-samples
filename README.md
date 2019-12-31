@@ -5,7 +5,7 @@
 ## Description
 Amazon Web Services is very popular for large-scale computing scenarios such as scientific computing, simulation, and research projects. These scenarios involve huge data sets collected from banking or retail equipment, measurement devices, or other compute jobs. After collection, these data sets need to be analyzed by large-scale compute jobs to generate result data sets. We can use a spot fleet of EC2 instances to compute your dataset uploaded to Amazon S3.
 
-## Lab Overview
+## Overview
 In this sample, we will demonstrate a prescriptive approach to launch a fleet of spot instances using AWS Lambda as soon as the dataset is uploaded to Amazon S3. Once the instances are allocated and up, the application downloads the dataset from Amazon S3 and processes it to generate output. This output then will be uploaded to Amazon S3 which will trigger a lambda function that terminates the spot instances launched.
 
 ## Architecture
