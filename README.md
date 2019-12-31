@@ -40,21 +40,21 @@ The diagram below shows how a spot instance is launched by the Lambda Function w
 	* Security Group: add the SG that allows the port 22 for debugging and 80 if application is a web app. The CloudFormation template creates this. You can use the same.
 
 	* In Advanced Settings: 
-	**	Purchasing Option: Spot
-	**	Spot Request Type: one-time {can also be persistent for different use cases}
-	**	IAM Instance Profile: if does not exist, create one role which allows EC2 to access other AWS services like Amazon S3.
-	**	UserData: refer “userdata.md” file and replace S3 url with your bucket name. Optionally, we override this in Lambda code as well.
+	*	Purchasing Option: Spot
+	*	Spot Request Type: one-time {can also be persistent for different use cases}
+	*	IAM Instance Profile: if does not exist, create one role which allows EC2 to access other AWS services like Amazon S3.
+	*	UserData: refer “userdata.md” file and replace S3 url with your bucket name. Optionally, we override this in Lambda code as well.
 8.	Once the template is created, update the first lambda function with its name or ID.
 9.	Now create an AutoScaling Group with the Launch Template and add a scaling policy based on CPU utilization. Use the settings as shown below, leave other parameters to their default values:
-a.	Min:0
-b.	Max:30 or whichever is the capacity you would need.
-c.	AZ : as per your network setting {I used us-east-1a, us-east-1b}
-d.	Subnets: as per your network config
-e.	Policy type: Target Tracking scaling
-f.	Execute policy when: As required to maintain Average CPU Utilization at 70
-g.	Take the action: Add or remove instances as required 
-h.	Instances need: 300 seconds to warm up after scaling
-i.	Disable scale-in: No
+*	Min:0
+*	Max:30 or whichever is the capacity you would need.
+*	AZ : as per your network setting {I used us-east-1a, us-east-1b}
+*	Subnets: as per your network config
+*	Policy type: Target Tracking scaling
+*	Execute policy when: As required to maintain Average CPU Utilization at 70
+*	Take the action: Add or remove instances as required 
+*	Instances need: 300 seconds to warm up after scaling
+*	Disable scale-in: No
 
 Although this application is solving a simple mathematical problem, with this approach, you can solve complex mathematical problems in various industries, leveraging AWS HPC. 
 
