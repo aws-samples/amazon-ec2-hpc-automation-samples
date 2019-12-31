@@ -30,15 +30,10 @@ The diagram below shows how a spot instance is launched by the Lambda Function w
 5.	Optional, create a SNS topic and subscribe to it from your email address so that you can get updates every time an instance is launched or terminated. Update the ARN in these lambda functions accordingly. When you launch the CloudFormation template, it creates a SNS topic; you can use it as well.
 6.	Now go to the Amazon EC2 dashboard and create an instance with the application from the “App” folder, its data, and its dependencies. Test the application. Once everything works fine, create an AMI out of it and use it in the launch template.  Note: Please replace your credentials and your S3 bucket name in “App/app.js” file before using it in the instance created.
 7.	Create a Launch Template with the following properties, leave the rest to their default values:
-
 * AMI id: ami-0ad53790da23622a5 or the AMI id that you have created (your Custome AMI).
-
 * Instance type: c4.large {you can add as many types of instance as you want separating them with a comma}
-
 * KeyPair: Use existing Key pair, this is used to log into the instances to debug. If there is no Key Pair, create one.
-
 * Security Group: add the SG that allows the port 22 for debugging and 80 if application is a web app. The CloudFormation template creates this. You can use the same.
-
 * In Advanced Settings: 
 	*	Purchasing Option: Spot
 	*	Spot Request Type: one-time {can also be persistent for different use cases}
