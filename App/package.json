@@ -1,0 +1,17 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "HPCDemo2App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bala Ravilla",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.361.0",
+    "csv-parser": "^2.1.0",
+    "mathjs": "^5.2.3",
+    "os": "^0.1.1"
+  }
+}
