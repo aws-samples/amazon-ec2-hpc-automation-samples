@@ -6,7 +6,7 @@
 Amazon Web Services is very popular for large-scale computing scenarios such as scientific computing, simulation, and research projects. These scenarios involve huge data sets collected from banking or retail equipment, measurement devices, or other compute jobs. After collection, these data sets need to be analyzed by large-scale compute jobs to generate result data sets. We can use a spot fleet of EC2 instances to compute your dataset uploaded to Amazon S3.
 
 ## Lab Overview
-In this hands-on workshop, we will demonstrate a prescriptive approach to launch a fleet of spot instances using AWS Lambda as soon as the dataset is uploaded to Amazon S3. Once the instances are allocated and up, the application downloads the dataset from Amazon S3 and processes it to generate output. This output then will be uploaded to Amazon S3 which will trigger a lambda function that terminates the spot instances launched.
+In this sample, we will demonstrate a prescriptive approach to launch a fleet of spot instances using AWS Lambda as soon as the dataset is uploaded to Amazon S3. Once the instances are allocated and up, the application downloads the dataset from Amazon S3 and processes it to generate output. This output then will be uploaded to Amazon S3 which will trigger a lambda function that terminates the spot instances launched.
 
 ## Architecture
 ![Architecture](images/architecture.png)
@@ -28,17 +28,22 @@ The diagram below shows how a spot instance is launched by the Lambda Function w
 3.	Create two Lambda functions, one for launching a spot fleet and another to delete the fleet, from the files “LambdaFunction1.js” and “LambdaFunction2.js”. 
 4.	Now configure the S3 bucket created to trigger these functions whenever an object is uploaded to the corresponding folders.
 5.	Optional, create a SNS topic and subscribe to it from your email address so that you can get updates every time an instance is launched or terminated. Update the ARN in these lambda functions accordingly. When you launch the CloudFormation template, it creates a SNS topic; you can use it as well.
-6.	Now go to the Amazon EC2 dashboard and create an instance with the application from the “App” folder, its data, and its dependencies. Test the application. Once everything works fine, create an AMI out of it and use it in the launch template.  Note: Please replace your credentials and your S3 bucket name in “App/app.js” file
+6.	Now go to the Amazon EC2 dashboard and create an instance with the application from the “App” folder, its data, and its dependencies. Test the application. Once everything works fine, create an AMI out of it and use it in the launch template.  Note: Please replace your credentials and your S3 bucket name in “App/app.js” file before using it in the instance created.
 7.	Create a Launch Template with the following properties, leave the rest to their default values:
+
 •	AMI id: ami-0ad53790da23622a5 or the AMI id that you have created (your Custome AMI).
+
 •	Instance type: c4.large {you can add as many types of instance as you want separating them with a comma}
+
 •	KeyPair: Use existing Key pair, this is used to log into the instances to debug. If there is no Key Pair, create one.
+
 •	Security Group: add the SG that allows the port 22 for debugging and 80 if application is a web app. The CloudFormation template creates this. You can use the same.
+
 •	In Advanced Settings: 
-o	Purchasing Option: Spot
-o	Spot Request Type: one-time {can also be persistent for different use cases}
-o	IAM Instance Profile: if does not exist, create one role which allows EC2 to access other AWS services like Amazon S3.
-o	UserData: refer “userdata.md” file and replace S3 url with your bucket name. Optionally, we override this in Lambda code as well.
+*	Purchasing Option: Spot
+*	Spot Request Type: one-time {can also be persistent for different use cases}
+*	IAM Instance Profile: if does not exist, create one role which allows EC2 to access other AWS services like Amazon S3.
+*	UserData: refer “userdata.md” file and replace S3 url with your bucket name. Optionally, we override this in Lambda code as well.
 8.	Once the template is created, update the first lambda function with its name or ID.
 9.	Now create an AutoScaling Group with the Launch Template and add a scaling policy based on CPU utilization. Use the settings as shown below, leave other parameters to their default values:
 a.	Min:0
@@ -53,7 +58,7 @@ i.	Disable scale-in: No
 
 Although this application is solving a simple mathematical problem, with this approach, you can solve complex mathematical problems in various industries, leveraging AWS HPC. 
 
-## NOTE:
+** NOTE: **
 
 @Sample Application Code:
 
