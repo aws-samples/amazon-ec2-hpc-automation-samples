@@ -11,7 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.814.0",
     "csv-parser": "^2.1.0",
-    "mathjs": "^5.2.3",
+    "mathjs": "^7.5.1",
     "os": "^0.1.1"
   }
 }
